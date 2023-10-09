@@ -37,3 +37,21 @@
       "aarch": "arm64"
       "armhf": "armhf"
       "armv7l": "armhf"
+
+- name: Install pip connection dependencies
+  ansible.builtin.pip:
+    name: '{{ item }}'
+    extra_args: --user
+  become: false
+  loop:
+    - pywinrm
+    - pypsrp
+    - requests
+    - requests-credssp
+    - netaddr
+    - dnspython
+
+- name: Install connection package dependencies
+  ansible.builtin.package:
+    name: sshpass
+    update_cache: true
